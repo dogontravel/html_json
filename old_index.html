@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        $.getJSON("data.json", function(data) {
+          var items = data.map(val => `<tr>
+                            <td>${val.name}</td>
+                            <td>${val.age}</td>
+                        </tr>`).join("");
+          $("table tbody").html(items);
+        });
+      });
+    </script>
+    <style>
+      body {
+        background-image: url("https://aviator-games.com/img/aviator-games.jpg");
+        background-size: cover;
+      }
+      table {
+        margin: 0 auto;
+        border: 2px solid black;
+        position: relative;
+        top: 200px;
+      }
+      td {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>  
+    <table>
+      <thead>
+        <tr>
+          <th>NikName</th>
+          <th>WIN</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </body>
+</html>
