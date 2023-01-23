@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        $.getJSON("data.json", function(data) {
+          var items = [];
+          $.each(data, function(key, val) {
+            items.push("<tr>");
+            items.push("<td>" + val.name + "</td>");
+            items.push("<td>" + val.age + "</td>");
+            items.push("</tr>");
+      });
+
+      $("<tbody/>", { html: items.join("") }).appendTo("table");
+    });
+  });
+  
+</script>
+<style>
+  body {
+    background-image: url("https://aviator-games.com/img/aviator-games.jpg");
+    background-size: cover;
+  }
+  
+  table {
+    margin: 0 auto; /* Center the table on the page */
+    border: 2px solid black; /* Add a 2px border to the table */
+    position: relative; /* Position the table relative to the body */
+    top: 400px; /* Move the table down 400px */
+  }
+  
+  td {
+    border: 1px solid black; /* Add a 1px border to each cell */
+  }
+</style>
+
+
+</script>
+<style>
+body {
+background-image: url("https://aviator-games.com/img/aviator-games.jpg");
+background-size: cover;
+}
+
+table {
+margin: 0 auto; /* Center the table on the page */
+border: 2px solid black; /* Add a 2px border to the table */
+position: relative; /* Position the table relative to the body */
+top: 200px; /* Move the table down 400px */
+}
+
+td {
+border: 1px solid black; /* Add a 1px border to each cell */
+}
+</style>
+</head>
+<body>  
+    <div style="text-align:center;">
+      <table>
+        <thead>
+            <tr>
+                <th>NikName</th>
+                <th>WIN</th>
+                              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
