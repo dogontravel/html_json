@@ -2,44 +2,57 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-      $(document).ready(function() {
-        $.getJSON("data.json", function(data) {
-          var items = data.map(val => `<tr>
-                            <td>${val.name}</td>
-                            <td>${val.age}</td>
-                        </tr>`).join("");
-          $("table tbody").html(items);
-        });
-      });
-    </script>
+    <title>Curiosity Rover Photos</title>
     <style>
-      body {
-        background-image: url("https://aviator-games.com/img/aviator-games.jpg");
-        background-size: cover;
-      }
-      table {
-        margin: 0 auto;
-        border: 2px solid black;
-        position: relative;
-        top: 200px;
-      }
-      td {
-        border: 1px solid black;
-      }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        td {
+            border: 1px solid gray;
+            text-align: center;
+        }
+        img {
+            width: 100%;
+        }
     </style>
   </head>
-  <body>  
-    <table>
-      <thead>
+  <body>
+    <center><h1>Снимки сделанные марсоходом Curiosity</h1></center>
+    <table id="photos">
         <tr>
-          <th>NikName</th>
-          <th>WIN</th>
         </tr>
-      </thead>
-      <tbody>
-      </tbody>
     </table>
+
+    <script>
+      const API_KEY = "DEMO_KEY";
+      const ROVER_NAME = "curiosity";
+      const SOL = 1000;
+      const CAMERA = "fhaz";
+      const CELLS_PER_ROW = 4;
+      let currentRow;
+
+      const apiUrl = `https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=DEMO_KEY`;
+
+      fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+            const photos = data.photos;
+            currentRow = document.createElement("tr");
+            document.getElementById("photos").appendChild(currentRow);
+            for (let i = 0; i < photos.length; i++) {
+                if (i % CELLS_PER_ROW === 0 && i !== 0) {
+                    currentRow = document.createElement("tr");
+                    document.getElementById("photos").appendChild(currentRow);
+                }
+                const imgCell = document.createElement("td");
+                const img = document.createElement("img");
+                img.src = photos[i].img_src;
+                imgCell.appendChild(img);
+                currentRow.appendChild(imgCell);
+            }
+        })
+        .catch(error => console.log(error));
+    </script>
   </body>
 </html>
